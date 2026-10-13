@@ -9,8 +9,11 @@ RESET="\033[0m"
 pass() { echo -e "${GREEN}[PASSED]${RESET} $1"; }
 fail() { echo -e "${RED}[FAILED]${RESET} $1"; }
 
-if pgrep -u svc -f "DONOTSTOPTHISPROCESS.sh" >/dev/null; then
+DONOT_PIDS=$(pgrep -u svc -f "DONOTSTOPTHISPROCESS.sh" || true)
+if [ -n "$DONOT_PIDS" ] && ! ps -o stat= -p $DONOT_PIDS | grep -q T; then
 	pass "DONOTSTOPTHISPROCESS.sh is running"
+elif [ -n "$DONOT_PIDS" ]; then
+	fail "DONOTSTOPTHISPROCESS.sh is still stopped"
 else
 	fail "DONOTSTOPTHISPROCESS.sh is not running"
 fi
