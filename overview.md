@@ -12,7 +12,7 @@ As you know, we recently had a new intern, Tim, join us at the systems team. Unf
 
 ### **2. Manual Service Deployment**
 * While you're still fiddling with this server, one of our newest services, **CameraService.sh** is ready to be deployed. Unfortunately, the dev team hasn't given us a timeline on when they can set up the DevOps pipeline for this new service, so you will have to get it up and running manually on the **svc** service account.
-  1. Switch to the **svc** account (it has no password, so use `sudo su - svc`)
+  1. Switch to the **svc** account (hint: it has no password)
   2. Look for the CameraService.sh script in **/opt/files**
   3. Run it in the background
   4. Disown the process from your current terminal session to let it be permanent
